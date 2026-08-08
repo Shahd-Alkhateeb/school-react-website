@@ -2,18 +2,14 @@ import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router';
 import { motion, AnimatePresence } from 'motion/react';
 import { Menu, X, GraduationCap } from 'lucide-react';
+import { ThemeToggle } from '../../../../shared/components/ThemeToggle';  
 
 const navLinks = [
   { label: 'Home', path: '/' },
   { label: 'About Us', path: '/about' },
-  { label: 'Programs', path: '/programs' },
-  { label: 'Activities', path: '/activities' },
-  { label: 'Events', path: '/events' },
-  { label: 'News', path: '/news' },
+  { label: 'Activities & Events', path: '/activities-events' },
   { label: 'Admissions', path: '/admissions' },
-  { label: 'Scholarships', path: '/scholarships' },
-  { label: 'Support', path: '/support' },
-  { label: 'Contact', path: '/contact' },
+  { label: 'Support & Contact', path: '/support-contact' },
 ];
 
 export function Navbar() {
@@ -34,29 +30,31 @@ export function Navbar() {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? 'bg-white/95 backdrop-blur-md shadow-sm border-b border-border' : 'bg-transparent'
+        scrolled ? 'bg-card/95 backdrop-blur-md shadow-sm border-b border-border' : 'bg-transparent'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 lg:h-20">
+          
+          {/* Logo */}
           <Link to="/" className="flex items-center gap-2.5 shrink-0">
             <div className="w-9 h-9 rounded-xl bg-primary flex items-center justify-center shadow-sm">
-              <GraduationCap className="w-5 h-5 text-white" />
+              <GraduationCap className="w-5 h-5 text-primary-foreground" />
             </div>
-            <span style={{ fontWeight: 700, fontSize: '1.125rem', color: 'var(--foreground)' }}>
+            <span className="font-extrabold text-lg text-foreground">
               Nova Academy
             </span>
           </Link>
 
-          <nav className="hidden xl:flex items-center gap-0.5">
+          {/* Desktop Nav Links */}
+          <nav className="hidden xl:flex items-center gap-1">
             {navLinks.map(link => (
               <Link
                 key={link.path}
                 to={link.path}
-                style={{ fontSize: '0.8125rem', fontWeight: 500 }}
-                className={`px-3 py-2 rounded-lg transition-colors whitespace-nowrap ${
+                className={`px-3.5 py-2 rounded-lg transition-colors whitespace-nowrap text-sm font-medium ${
                   location.pathname === link.path
-                    ? 'text-primary bg-primary/8'
+                    ? 'text-primary bg-primary/10'
                     : 'text-muted-foreground hover:text-foreground hover:bg-muted/60'
                 }`}
               >
@@ -65,39 +63,39 @@ export function Navbar() {
             ))}
           </nav>
 
-          <div className="hidden lg:flex items-center gap-2 shrink-0">
+          {/* Desktop Actions & Theme Toggle */}
+          <div className="hidden lg:flex items-center gap-2.5 shrink-0">
             <a
               href="#"
-              style={{ fontSize: '0.8125rem', fontWeight: 500 }}
-              className="px-3.5 py-2 rounded-lg border border-border text-foreground hover:bg-muted/50 transition-colors whitespace-nowrap"
+              className="px-3.5 py-2 rounded-xl border border-border text-foreground hover:bg-muted transition-colors whitespace-nowrap text-sm font-medium"
             >
-              Parent Portal
-            </a>
-            <a
-              href="#"
-              style={{ fontSize: '0.8125rem', fontWeight: 500 }}
-              className="px-3.5 py-2 rounded-lg border border-border text-foreground hover:bg-muted/50 transition-colors whitespace-nowrap"
-            >
-              Student Portal
+              Portals
             </a>
             <Link
               to="/admissions"
-              style={{ fontSize: '0.8125rem', fontWeight: 600 }}
-              className="px-4 py-2 rounded-lg bg-primary text-white hover:opacity-90 transition-opacity whitespace-nowrap shadow-sm"
+              className="px-4 py-2.5 rounded-xl bg-primary text-primary-foreground hover:opacity-90 transition-opacity whitespace-nowrap shadow-sm text-sm font-bold"
             >
               Apply Now
             </Link>
+            
+            {/* 👈 زر تبديل الثيم */}
+            <ThemeToggle />
           </div>
 
-          <button
-            onClick={() => setMobileOpen(!mobileOpen)}
-            className="xl:hidden p-2 rounded-lg hover:bg-muted/50 transition-colors"
-          >
-            {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-          </button>
+          {/* Mobile Menu Button & Theme Toggle */}
+          <div className="flex items-center gap-2 xl:hidden">
+            <ThemeToggle />
+            <button
+              onClick={() => setMobileOpen(!mobileOpen)}
+              className="p-2 rounded-xl hover:bg-muted transition-colors border border-transparent hover:border-border text-foreground"
+            >
+              {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            </button>
+          </div>
         </div>
       </div>
 
+      {/* Mobile Menu */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
@@ -105,17 +103,16 @@ export function Navbar() {
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.2 }}
-            className="xl:hidden bg-white border-b border-border overflow-hidden"
+            className="xl:hidden bg-card border-b border-border overflow-hidden"
           >
-            <div className="max-w-7xl mx-auto px-4 py-4 space-y-0.5">
+            <div className="max-w-7xl mx-auto px-4 py-4 space-y-1">
               {navLinks.map(link => (
                 <Link
                   key={link.path}
                   to={link.path}
-                  style={{ fontSize: '0.9375rem', fontWeight: 500 }}
-                  className={`block px-4 py-3 rounded-xl transition-colors ${
+                  className={`block px-4 py-3 rounded-xl transition-colors text-[0.9375rem] font-medium ${
                     location.pathname === link.path
-                      ? 'text-primary bg-primary/8'
+                      ? 'text-primary bg-primary/10'
                       : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
                   }`}
                 >
@@ -123,9 +120,8 @@ export function Navbar() {
                 </Link>
               ))}
               <div className="pt-4 space-y-2 border-t border-border mt-4">
-                <a href="#" style={{ fontWeight: 500 }} className="block px-4 py-3 rounded-xl border border-border text-center text-muted-foreground">Parent Portal</a>
-                <a href="#" style={{ fontWeight: 500 }} className="block px-4 py-3 rounded-xl border border-border text-center text-muted-foreground">Student Portal</a>
-                <Link to="/admissions" style={{ fontWeight: 600 }} className="block px-4 py-3 rounded-xl bg-primary text-white text-center shadow-sm">Apply Now</Link>
+                <a href="#" className="block px-4 py-3 rounded-xl border border-border text-center text-foreground font-medium">Portals</a>
+                <Link to="/admissions" className="block px-4 py-3 rounded-xl bg-primary text-primary-foreground text-center shadow-sm font-bold">Apply Now</Link>
               </div>
             </div>
           </motion.div>

@@ -1,16 +1,11 @@
 import { createBrowserRouter } from 'react-router';
-import WebsiteLayout from './components/website/layout/WebsiteLayout';
-import HomePage from './components/website/pages/HomePage';
-import AboutPage from './components/website/pages/AboutPage';
-import AcademicProgramsPage from './components/website/pages/AcademicProgramsPage';
-import ActivitiesPage from './components/website/pages/ActivitiesPage';
-import EventsPage from './components/website/pages/EventsPage';
-import NewsPage from './components/website/pages/NewsPage';
-import ScholarshipsPage from './components/website/pages/ScholarshipsPage';
-import AdmissionsPage from './components/website/pages/AdmissionsPage';
-import SupportPage from './components/website/pages/SupportPage';
-import ContactPage from './components/website/pages/ContactPage';
-import AdminApp from './components/admin/AdminApp';
+import WebsiteLayout from '../features/website/components/layout/WebsiteLayout';
+import HomePage from '../features/website/pages/HomePage';
+import AboutPage from '../features/website/pages/AboutPage';
+import ActivitiesEventsPage from '../features/website/pages/ActivitiesEventsPage';
+import AdmissionsPage from '../features/website/pages/AdmissionsPage';
+import SupportContactPage from '../features/website/pages/SupportContactPage';
+import AdminApp from '../features/admin/components/AdminApp';
 
 export const router = createBrowserRouter([
   {
@@ -19,14 +14,9 @@ export const router = createBrowserRouter([
     children: [
       { index: true, Component: HomePage },
       { path: 'about', Component: AboutPage },
-      { path: 'programs', Component: AcademicProgramsPage },
-      { path: 'activities', Component: ActivitiesPage },
-      { path: 'events', Component: EventsPage },
-      { path: 'news', Component: NewsPage },
-      { path: 'scholarships', Component: ScholarshipsPage },
+      { path: 'activities-events', Component: ActivitiesEventsPage },
       { path: 'admissions', Component: AdmissionsPage },
-      { path: 'support', Component: SupportPage },
-      { path: 'contact', Component: ContactPage },
+      { path: 'support-contact', Component: SupportContactPage },
     ],
   },
   {

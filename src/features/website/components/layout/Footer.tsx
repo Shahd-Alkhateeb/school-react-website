@@ -6,46 +6,29 @@ const sections = [
     title: 'School',
     links: [
       { label: 'About Us', path: '/about' },
-      { label: 'Academic Programs', path: '/programs' },
-      { label: 'Activities & Clubs', path: '/activities' },
-      { label: 'Events Calendar', path: '/events' },
-      { label: 'News & Announcements', path: '/news' },
-    ],
-  },
-  {
-    title: 'Platform',
-    links: [
-      { label: 'Parent Portal', path: '#' },
-      { label: 'Student Portal', path: '#' },
-      { label: 'ERP System', path: '/admin' },
-      { label: 'Mobile App', path: '#' },
-      { label: 'Academic Analytics', path: '#' },
+      { label: 'Activities & Events', path: '/activities-events' },
+      { label: 'Academic Programs', path: '/admissions' },
     ],
   },
   {
     title: 'Admissions',
     links: [
       { label: 'Apply Now', path: '/admissions' },
-      { label: 'Scholarships', path: '/scholarships' },
-      { label: 'Tuition & Fees', path: '/scholarships' },
+      { label: 'Tuition & Fees', path: '/admissions' },
       { label: 'Requirements', path: '/admissions' },
-      { label: 'FAQs', path: '/support' },
     ],
   },
   {
-    title: 'Support',
+    title: 'Support & Contact',
     links: [
-      { label: 'Help Center', path: '/support' },
-      { label: 'Contact Us', path: '/contact' },
-      { label: 'FAQ', path: '/support' },
+      { label: 'Help Center', path: '/support-contact' },
+      { label: 'Contact Us', path: '/support-contact' },
       { label: 'Privacy Policy', path: '#' },
-      { label: 'Terms of Service', path: '#' },
     ],
   },
 ];
 
 const socials = [
-  { icon: Twitter, href: '#', label: 'Twitter' },
   { icon: Facebook, href: '#', label: 'Facebook' },
   { icon: Instagram, href: '#', label: 'Instagram' },
   { icon: Linkedin, href: '#', label: 'LinkedIn' },

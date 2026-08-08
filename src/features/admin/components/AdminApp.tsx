@@ -1,16 +1,16 @@
 import { useState } from 'react';
-import Sidebar from './components/Sidebar';
-import StatsCard from './components/StatsCard';
-import AttendanceCard from './components/AttendanceCard';
-import AssignmentCard from './components/AssignmentCard';
-import SchoolMomentCard from './components/SchoolMomentCard';
-import AttendanceChart from './components/AttendanceChart';
-import RecentActivities from './components/RecentActivities';
-import LoginPage from './components/auth/LoginPage';
-import ForgotPasswordPage from './components/auth/ForgotPasswordPage';
-import OTPPage from './components/auth/OTPPage';
-import ResetPasswordPage from './components/auth/ResetPasswordPage';
-import SuccessPage from './components/auth/SuccessPage';
+import Sidebar from '../../../app/components/Sidebar';
+import StatsCard from '../../../app/components/StatsCard';
+import AttendanceCard from '../../../app/components/AttendanceCard';
+import AssignmentCard from '../../../app/components/AssignmentCard';
+import SchoolMomentCard from '../../../app/components/SchoolMomentCard';
+import AttendanceChart from '../../../app/components/AttendanceChart';
+import RecentActivities from '../../../app/components/RecentActivities';
+import LoginPage from '../../auth/components/LoginPage';
+import ForgotPasswordPage from '../../auth/components/ForgotPasswordPage';
+import OTPPage from '../../auth/components/OTPPage';
+import ResetPasswordPage from '../../auth/components/ResetPasswordPage';
+import SuccessPage from '../../auth/components/SuccessPage';
 import { Users, BookOpen, GraduationCap, Calendar, Search, Bell, FileText } from 'lucide-react';
 
 type AuthView = 'login' | 'forgot-password' | 'otp' | 'reset-password' | 'success' | 'dashboard';
@@ -92,6 +92,7 @@ export default function AdminApp() {
             </div>
           </div>
         </header>
+
         <main className="p-8">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
             <StatsCard title="Total Students" value="1,234" icon={Users} trend="+12% from last month" trendUp={true} color="bg-primary" />
@@ -99,10 +100,12 @@ export default function AdminApp() {
             <StatsCard title="Total Courses" value="45" icon={BookOpen} trend="5 active courses" trendUp={true} color="bg-coral" />
             <StatsCard title="Upcoming Events" value="12" icon={Calendar} trend="3 this week" trendUp={false} color="bg-royal-blue" />
           </div>
+
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
             <div className="lg:col-span-2"><AttendanceChart /></div>
             <AttendanceCard />
           </div>
+
           <div className="mb-8">
             <div className="flex items-center justify-between mb-4">
               <h2>Assignment Status</h2>
@@ -115,6 +118,7 @@ export default function AdminApp() {
               <AssignmentCard subject="Maths" lastDate="17/12/2025" color="bg-teal" icon={<FileText className="w-5 h-5" />} />
             </div>
           </div>
+
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             <div className="lg:col-span-2">
               <div className="flex items-center justify-between mb-4">
