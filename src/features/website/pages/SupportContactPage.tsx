@@ -15,12 +15,12 @@ const stagger = { visible: { transition: { staggerChildren: 0.08 } } };
 
 // ✅ تم ربط الألوان بمتغيرات الثيم
 const departments = [
-  { id: 'admissions', label: 'Admissions Office', email: 'admissions@novaacademy.edu', phone: '+971 4 555 1236' },
-  { id: 'finance', label: 'Finance Department', email: 'finance@novaacademy.edu', phone: '+971 4 555 1237' },
-  { id: 'academic', label: 'Academic Affairs', email: 'academic@novaacademy.edu', phone: '+971 4 555 1238' },
-  { id: 'counseling', label: 'Student Counseling', email: 'counseling@novaacademy.edu', phone: '+971 4 555 1239' },
-  { id: 'technical', label: 'Technical Support', email: 'support@novaacademy.edu', phone: '+971 4 555 1240' },
-  { id: 'principal', label: "Principal's Office", email: 'principal@novaacademy.edu', phone: '+971 4 555 1234' },
+  { id: 'admissions', label: 'Admissions Office', email: 'admissions@madrasaty.edu', phone: '+971 4 555 1236' },
+  { id: 'finance', label: 'Finance Department', email: 'finance@madrasaty.edu', phone: '+971 4 555 1237' },
+  { id: 'academic', label: 'Academic Affairs', email: 'academic@madrasaty.edu', phone: '+971 4 555 1238' },
+  { id: 'counseling', label: 'Student Counseling', email: 'counseling@madrasaty.edu', phone: '+971 4 555 1239' },
+  { id: 'technical', label: 'Technical Support', email: 'support@madrasaty.edu', phone: '+971 4 555 1240' },
+  { id: 'principal', label: "Principal's Office", email: 'principal@madrasaty.edu', phone: '+971 4 555 1234' },
 ];
 
 const supportCategories = [
@@ -118,7 +118,7 @@ export default function SupportContactPage() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
                   {[
                     { icon: Phone, title: 'Main Reception', value: '+971 4 555 1234', sub: 'Sun–Thu, 7 AM – 5 PM', theme: { text: 'text-primary', bg: 'bg-primary/10' }, href: 'tel:+97145551234' },
-                    { icon: Mail, title: 'General Enquiries', value: 'info@nova.edu', sub: 'Response within 24h', theme: { text: 'text-teal', bg: 'bg-teal/10' }, href: 'mailto:info@novaacademy.edu' },
+                    { icon: Mail, title: 'General Enquiries', value: 'info@madrasaty.edu', sub: 'Response within 24h', theme: { text: 'text-teal', bg: 'bg-teal/10' }, href: 'mailto:info@madrasaty.edu' },
                     { icon: MapPin, title: 'Campus Address', value: 'Academic City', sub: 'Building 7, Dubai', theme: { text: 'text-coral', bg: 'bg-coral/10' }, href: '#map' },
                     { icon: MessageSquare, title: 'WhatsApp', value: '+971 50 555 1234', sub: 'Quick queries', theme: { text: 'text-success', bg: 'bg-success/10' }, href: 'https://wa.me/971505551234' },
                   ].map(({ icon: Icon, title, value, sub, theme, href }) => (
@@ -351,7 +351,7 @@ export default function SupportContactPage() {
               <div className="w-16 h-16 rounded-full bg-primary flex items-center justify-center mx-auto mb-4 shadow-md">
                 <MapPin className="w-8 h-8 text-primary-foreground" />
               </div>
-              <p className="font-extrabold text-xl text-foreground mb-1">Nova Academy</p>
+              <p className="font-extrabold text-xl text-foreground mb-1">Madrasaty Academy</p>
               <p className="text-sm text-muted-foreground mb-5">Academic City, Dubai, UAE</p>
               <a
                 href="https://maps.google.com/?q=Academic+City+Dubai"

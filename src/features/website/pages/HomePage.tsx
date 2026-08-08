@@ -126,7 +126,7 @@ export default function HomePage() {
               </motion.h1>
 
               <motion.p variants={fadeUp} className="text-lg text-muted-foreground leading-relaxed mb-10 max-w-xl">
-                Nova Academy combines world-class Cambridge education with cutting-edge technology to deliver a transformative learning experience for students from KG to Grade 12.
+                Madrasaty Academy combines world-class Cambridge education with cutting-edge technology to deliver a transformative learning experience for students from KG to Grade 12.
               </motion.p>
 
               <motion.div variants={fadeUp} className="flex flex-wrap gap-4">

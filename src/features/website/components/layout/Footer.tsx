@@ -45,7 +45,7 @@ export function Footer() {
               <div className="w-9 h-9 rounded-xl bg-primary flex items-center justify-center">
                 <GraduationCap className="w-5 h-5 text-white" />
               </div>
-              <span style={{ fontWeight: 700, fontSize: '1.125rem' }}>Nova Academy</span>
+              <span style={{ fontWeight: 700, fontSize: '1.125rem' }}>Madrasaty Academy</span>
             </Link>
             <p style={{ fontSize: '0.875rem', lineHeight: '1.625' }} className="text-white/60 mb-6">
               Empowering tomorrow's leaders through innovation, excellence, and a holistic education experience.
@@ -57,11 +57,11 @@ export function Footer() {
               </a>
               <a href="tel:+97145551234" style={{ fontSize: '0.8125rem' }} className="flex items-center gap-2.5 text-white/60 hover:text-white transition-colors">
                 <Phone className="w-4 h-4 shrink-0" />
-                +971 4 555 1234
+                +963 994416055
               </a>
               <div style={{ fontSize: '0.8125rem' }} className="flex items-start gap-2.5 text-white/60">
                 <MapPin className="w-4 h-4 shrink-0 mt-0.5" />
-                Academic City, Dubai, UAE
+                Academic City, Syria
               </div>
             </div>
           </div>
@@ -92,7 +92,7 @@ export function Footer() {
 
         <div className="border-t border-white/10 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p style={{ fontSize: '0.8125rem' }} className="text-white/40">
-            © 2026 Nova Academy. All rights reserved.
+            © 2026 Madrasaty Academy. All rights reserved.
           </p>
           <div className="flex items-center gap-3">
             {socials.map(({ icon: Icon, href, label }) => (

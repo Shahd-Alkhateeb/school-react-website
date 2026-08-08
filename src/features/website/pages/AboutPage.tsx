@@ -20,7 +20,7 @@ const values = [
 ];
 
 const timeline = [
-  { year: '1998', title: 'Founded', desc: 'Nova Academy opens its doors with 120 students and a vision to redefine education in the region.' },
+  { year: '1998', title: 'Founded', desc: 'Madrasaty Academy opens its doors with 120 students and a vision to redefine education in the region.' },
   { year: '2003', title: 'Cambridge Accreditation', desc: 'Achieved full Cambridge International Schools accreditation, the first in the region.' },
   { year: '2008', title: '1000 Students Milestone', desc: 'Enrolled our 1,000th student and opened a new science and technology wing.' },
   { year: '2015', title: 'Smart Campus Launch', desc: 'Launched our digital-first campus with smart classrooms and the first School ERP system.' },
@@ -58,7 +58,7 @@ export default function AboutPage() {
               </span>
             </motion.h1>
             <motion.p variants={fadeUp} className="text-lg text-muted-foreground leading-relaxed">
-              Since 1998, Nova Academy has been shaping the minds of tomorrow's leaders. We combine rigorous Cambridge academics with cutting-edge technology and a nurturing environment to help every student reach their full potential.
+              Since 1998, Madrasaty Academy has been shaping the minds of tomorrow's leaders. We combine rigorous Cambridge academics with cutting-edge technology and a nurturing environment to help every student reach their full potential.
             </motion.p>
           </motion.div>
         </div>

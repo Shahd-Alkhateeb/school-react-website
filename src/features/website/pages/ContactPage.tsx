@@ -6,17 +6,17 @@ import { Phone, Mail, MapPin, Clock, MessageSquare, CheckCircle, ArrowRight, Che
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] } },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] as const} },
 };
 const stagger = { visible: { transition: { staggerChildren: 0.08 } } };
 
 const departments = [
-  { id: 'admissions', label: 'Admissions Office', email: 'admissions@novaacademy.edu', phone: '+971 4 555 1236' },
-  { id: 'finance', label: 'Finance Department', email: 'finance@novaacademy.edu', phone: '+971 4 555 1237' },
-  { id: 'academic', label: 'Academic Affairs', email: 'academic@novaacademy.edu', phone: '+971 4 555 1238' },
-  { id: 'counseling', label: 'Student Counseling', email: 'counseling@novaacademy.edu', phone: '+971 4 555 1239' },
-  { id: 'technical', label: 'Technical Support', email: 'support@novaacademy.edu', phone: '+971 4 555 1240' },
-  { id: 'principal', label: 'Principal\'s Office', email: 'principal@novaacademy.edu', phone: '+971 4 555 1234' },
+  { id: 'admissions', label: 'Admissions Office', email: 'admissions@novaacademy.edu', phone: '+963 933 505 771' },
+  { id: 'finance', label: 'Finance Department', email: 'finance@novaacademy.edu', phone: '+963 977 780 850' },
+  { id: 'academic', label: 'Academic Affairs', email: 'academic@novaacademy.edu', phone: '+963 933 505 771' },
+  { id: 'counseling', label: 'Student Counseling', email: 'counseling@novaacademy.edu', phone: '+963 933 505 771' },
+  { id: 'technical', label: 'Technical Support', email: 'support@novaacademy.edu', phone: '+963 933 505 771' },
+  { id: 'principal', label: 'Principal\'s Office', email: 'principal@novaacademy.edu', phone: '+963 977 780 850' },
 ];
 
 export default function ContactPage() {

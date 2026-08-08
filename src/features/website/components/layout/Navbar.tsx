@@ -42,7 +42,7 @@ export function Navbar() {
               <GraduationCap className="w-5 h-5 text-primary-foreground" />
             </div>
             <span className="font-extrabold text-lg text-foreground">
-              Nova Academy
+              Madrasaty Academy
             </span>
           </Link>
 
@@ -65,12 +65,7 @@ export function Navbar() {
 
           {/* Desktop Actions & Theme Toggle */}
           <div className="hidden lg:flex items-center gap-2.5 shrink-0">
-            <a
-              href="#"
-              className="px-3.5 py-2 rounded-xl border border-border text-foreground hover:bg-muted transition-colors whitespace-nowrap text-sm font-medium"
-            >
-              Portals
-            </a>
+           
             <Link
               to="/admissions"
               className="px-4 py-2.5 rounded-xl bg-primary text-primary-foreground hover:opacity-90 transition-opacity whitespace-nowrap shadow-sm text-sm font-bold"
@@ -78,7 +73,6 @@ export function Navbar() {
               Apply Now
             </Link>
             
-            {/* 👈 زر تبديل الثيم */}
             <ThemeToggle />
           </div>
 

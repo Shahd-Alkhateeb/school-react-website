@@ -20,12 +20,12 @@ const activityCategories: ActivityCategory[] = ['All', 'Sports', 'Technology', '
 const eventTypes: EventType[] = ['All', 'Exams', 'Meetings', 'Workshops', 'Trips', 'Competitions', 'Graduation'];
 
 const eventTypeConfig: Record<string, { color: string; bg: string }> = {
-  Exams: { color: '#EF4444', bg: '#FEF2F2' },
-  Meetings: { color: '#5B4FC7', bg: '#F0EEFF' },
-  Workshops: { color: '#4EABBE', bg: '#E6F6FA' },
-  Trips: { color: '#10B981', bg: '#ECFDF5' },
-  Competitions: { color: '#F59E0B', bg: '#FFFBEB' },
-  Graduation: { color: '#EF7B6C', bg: '#FEF2F0' },
+  Exams: { color: 'var(--destructive)', bg: 'color-mix(in srgb, var(--destructive) 12%, transparent)' },
+  Meetings: { color: 'var(--primary)', bg: 'color-mix(in srgb, var(--primary) 10%, transparent)' },
+  Workshops: { color: 'var(--teal)', bg: 'color-mix(in srgb, var(--teal) 12%, transparent)' },
+  Trips: { color: 'var(--success)', bg: 'color-mix(in srgb, var(--success) 12%, transparent)' },
+  Competitions: { color: 'var(--warning)', bg: 'color-mix(in srgb, var(--warning) 14%, transparent)' },
+  Graduation: { color: 'var(--coral)', bg: 'color-mix(in srgb, var(--coral) 12%, transparent)' },
 };
 
 // --- Mock Data ---
@@ -127,8 +127,8 @@ export default function ActivitiesEventsPage() {
   return (
     <div>
       {/* SHARED HERO SECTION */}
-      <section className="pt-28 pb-16 relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #F8F6FF 0%, #EDE9FF 50%, #E8F0FF 100%)' }}>
-        <div style={{ position: 'absolute', top: '-10%', right: '-5%', width: 500, height: 500, borderRadius: '50%', background: 'radial-gradient(circle, rgba(91,79,199,0.12) 0%, transparent 70%)', pointerEvents: 'none' }} />
+      <section className="pt-28 pb-16 relative overflow-hidden bg-gradient-to-br from-background via-secondary/20 to-secondary/40">
+        <div style={{ position: 'absolute', top: '-10%', right: '-5%', width: 500, height: 500, borderRadius: '50%', background: 'radial-gradient(circle, color-mix(in srgb, var(--primary) 12%, transparent) 0%, transparent 70%)', pointerEvents: 'none' }} />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div initial="hidden" animate="visible" variants={stagger} className="max-w-3xl mx-auto">
             <motion.span variants={fadeUp} className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary mb-6" style={{ fontSize: '0.8125rem', fontWeight: 600 }}>
@@ -137,7 +137,7 @@ export default function ActivitiesEventsPage() {
             </motion.span>
             <motion.h1 variants={fadeUp} style={{ fontSize: 'clamp(2.25rem, 4.5vw, 3.5rem)', fontWeight: 800, letterSpacing: '-0.02em', color: 'var(--foreground)', lineHeight: 1.1 }} className="mb-5">
               Explore Our{' '}
-              <span style={{ background: 'linear-gradient(135deg, #5B4FC7 0%, #4EABBE 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
+              <span style={{ background: 'linear-gradient(135deg, var(--primary) 0%, var(--teal) 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
                 Vibrant Community
               </span>
             </motion.h1>
@@ -172,7 +172,7 @@ export default function ActivitiesEventsPage() {
           <motion.div key="activities" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.3 }}>
             
             {/* ACTIVITIES FILTERS */}
-            <section className="py-8 bg-white border-b border-border">
+            <section className="py-8 bg-background border-b border-border">
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex flex-wrap justify-center gap-2">
                   {activityCategories.map(cat => (
@@ -196,7 +196,7 @@ export default function ActivitiesEventsPage() {
             </section>
 
             {/* ACTIVITIES GRID */}
-            <section className="py-16 bg-white">
+            <section className="py-16 bg-background">
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                   {filteredActivities.map((activity, i) => (
@@ -271,7 +271,7 @@ export default function ActivitiesEventsPage() {
             </section>
 
             {/* ACTIVITIES STATS BANNER */}
-            <section className="py-16" style={{ background: '#F8F6FF' }}>
+            <section className="py-16 bg-secondary/30">
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
                   {[
@@ -295,7 +295,7 @@ export default function ActivitiesEventsPage() {
         {activeTab === 'events' && (
           <motion.div key="events" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.3 }}>
             
-            <section className="py-12 bg-white">
+            <section className="py-12 bg-background">
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                   
@@ -357,7 +357,7 @@ export default function ActivitiesEventsPage() {
                       )}
                       
                       {filteredEvents.map((event, i) => {
-                        const cfg = eventTypeConfig[event.type] ?? { color: '#5B4FC7', bg: '#F0EEFF' };
+                        const cfg = eventTypeConfig[event.type] ?? { color: 'var(--primary)', bg: 'color-mix(in srgb, var(--primary) 10%, transparent)' };
                         return (
                           <motion.div
                             key={event.id}
