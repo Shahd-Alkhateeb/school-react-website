@@ -7,14 +7,6 @@ const sections = [
     links: [
       { label: 'About Us', path: '/about' },
       { label: 'Activities & Events', path: '/activities-events' },
-      { label: 'Academic Programs', path: '/admissions' },
-    ],
-  },
-  {
-    title: 'Admissions',
-    links: [
-      { label: 'Apply Now', path: '/admissions' },
-      { label: 'Tuition & Fees', path: '/admissions' },
     ],
   },
   {

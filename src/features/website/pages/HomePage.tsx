@@ -132,8 +132,8 @@ export default function HomePage() {
 
               <motion.div variants={fadeUp} className="flex flex-wrap gap-4">
 
-                <Link to="/admissions" className="bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-4 rounded-xl font-bold inline-flex items-center justify-center transition-colors shadow-sm gap-2">
-                  Apply Now
+                <Link to="/support-contact" className="bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-4 rounded-xl font-bold inline-flex items-center justify-center transition-colors shadow-sm gap-2">
+                  Contact Us
                   <ArrowRight className="w-5 h-5" />
                 </Link>
                 <Link to="/about" className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl border border-border bg-card text-foreground hover:bg-muted transition-colors font-bold shadow-sm">
@@ -395,33 +395,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/*CTA BANNER*/}
-      <section className="py-24 bg-card border-y border-border">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
-            <motion.div variants={fadeUp} className="rounded-[2.5rem] p-12 md:p-16 relative overflow-hidden bg-background border border-border shadow-sm">
-              <div className="relative z-10">
-                <h2 className="text-3xl md:text-5xl font-extrabold text-foreground leading-tight mb-5">
-                  Ready to Join Madrasaty Academy?
-                </h2>
-                <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-10">
-                  Join our community of 1,500+ students and families building the future together.
-                </p>
-                <div className="flex flex-wrap items-center justify-center gap-4">
-
-                  <Link to="/admissions" className="bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-4 rounded-xl font-bold inline-flex items-center justify-center transition-colors shadow-sm gap-2">
-                    Apply Now
-                    <ArrowRight className="w-5 h-5" />
-                  </Link>
-                  <Link to="/contact" className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl border border-border text-foreground hover:bg-muted transition-colors font-bold bg-card shadow-sm">
-                    Contact Us
-                  </Link>
-                </div>
-              </div>
-            </motion.div>
-          </motion.div>
-        </div>
-      </section>
+    
     </div>
   );
 }
