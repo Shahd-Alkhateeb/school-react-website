@@ -3,8 +3,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { useForm } from "@formspree/react";
 import { 
   Phone, Mail, MapPin, Clock, MessageSquare, CheckCircle, 
-  ArrowRight, ChevronDown, HelpCircle, BookOpen, Video, 
-  FileText, Wrench, GraduationCap, Heart, BarChart3 
+  ArrowRight, ChevronDown, Wrench, GraduationCap, Heart, BarChart3 
 } from 'lucide-react';
 
 const fadeUp = {
@@ -13,14 +12,13 @@ const fadeUp = {
 };
 const stagger = { visible: { transition: { staggerChildren: 0.08 } } };
 
-// ✅ تم ربط الألوان بمتغيرات الثيم
 const departments = [
-  { id: 'admissions', label: 'Admissions Office', email: 'admissions@madrasaty.edu', phone: '+971 4 555 1236' },
-  { id: 'finance', label: 'Finance Department', email: 'finance@madrasaty.edu', phone: '+971 4 555 1237' },
-  { id: 'academic', label: 'Academic Affairs', email: 'academic@madrasaty.edu', phone: '+971 4 555 1238' },
-  { id: 'counseling', label: 'Student Counseling', email: 'counseling@madrasaty.edu', phone: '+971 4 555 1239' },
-  { id: 'technical', label: 'Technical Support', email: 'support@madrasaty.edu', phone: '+971 4 555 1240' },
-  { id: 'principal', label: "Principal's Office", email: 'principal@madrasaty.edu', phone: '+971 4 555 1234' },
+  { id: 'admissions', label: 'Admissions Office', email: 'admissions@madrasaty.edu', phone: '+963 998 531 853' },
+  { id: 'finance', label: 'Finance Department', email: 'finance@madrasaty.edu', phone: '+963 990 781 188' },
+  { id: 'academic', label: 'Academic Affairs', email: 'academic@madrasaty.edu', phone: '+963 994 488 707' },
+  { id: 'counseling', label: 'Student Counseling', email: 'counseling@madrasaty.edu', phone: '+963 996 878 505' },
+  { id: 'technical', label: 'Technical Support', email: 'support@madrasaty.edu', phone: '+963 933 606 808' },
+  { id: 'principal', label: "Principal's Office", email: 'principal@madrasaty.edu', phone: '+963 997 606 454' },
 ];
 
 const supportCategories = [
@@ -28,12 +26,6 @@ const supportCategories = [
   { icon: GraduationCap, title: 'Academic Support', desc: 'Grade queries, assignment clarifications, curriculum questions.', theme: { text: 'text-teal', bg: 'bg-teal/10' }, tickets: 18 },
   { icon: Heart, title: 'Counseling Support', desc: 'Wellness resources, appointment booking, student mental health.', theme: { text: 'text-coral', bg: 'bg-coral/10' }, tickets: 7 },
   { icon: BarChart3, title: 'Finance Support', desc: 'Tuition invoices, payment plans, refunds, scholarship applications.', theme: { text: 'text-success', bg: 'bg-success/10' }, tickets: 12 },
-];
-
-const resources = [
-  { icon: BookOpen, title: 'Knowledge Base', desc: 'Browse 200+ articles covering every aspect of school life.' },
-  { icon: Video, title: 'Video Tutorials', desc: 'Step-by-step video guides for the Portals and mobile app.' },
-  { icon: FileText, title: 'Documentation', desc: 'Official school policies, handbooks, and form downloads.' },
 ];
 
 const faqs = [
@@ -57,15 +49,7 @@ export default function SupportContactPage() {
   const [activeTab, setActiveTab] = useState<'contact' | 'support'>('contact');
   const [state, formspreeSubmit] = useForm("xpqekbrd");
   const [form, setForm] = useState({ name: '', email: '', phone: '', department: 'admissions', subject: '', message: '' });
-
   const [openFaq, setOpenFaq] = useState<string | null>(null);
-  const [ticketForm, setTicketForm] = useState({ name: '', email: '', category: 'Technical Support', subject: '', message: '' });
-  const [ticketSubmitted, setTicketSubmitted] = useState(false);
-
-  const handleTicketSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setTicketSubmitted(true);
-  };
 
   return (
     <div>
@@ -85,7 +69,7 @@ export default function SupportContactPage() {
               </span>
             </motion.h1>
             <motion.p variants={fadeUp} className="text-lg text-muted-foreground leading-relaxed mb-8">
-              Get in touch with our administrative departments or open an instant support ticket. We are always here to help.
+              Get in touch with our administrative departments or browse our support center. We are always here to help.
             </motion.p>
 
             <motion.div variants={fadeUp} className="inline-flex p-1.5 rounded-2xl bg-card border border-border shadow-sm">
@@ -117,10 +101,10 @@ export default function SupportContactPage() {
                 {/* QUICK CONTACT CARDS */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
                   {[
-                    { icon: Phone, title: 'Main Reception', value: '+971 4 555 1234', sub: 'Sun–Thu, 7 AM – 5 PM', theme: { text: 'text-primary', bg: 'bg-primary/10' }, href: 'tel:+97145551234' },
+                    { icon: Phone, title: 'Main Reception', value: '+963 994 416 080', sub: 'Sun–Thu, 7 AM – 5 PM', theme: { text: 'text-primary', bg: 'bg-primary/10' }, href: 'tel:+963994416080' },
                     { icon: Mail, title: 'General Enquiries', value: 'info@madrasaty.edu', sub: 'Response within 24h', theme: { text: 'text-teal', bg: 'bg-teal/10' }, href: 'mailto:info@madrasaty.edu' },
-                    { icon: MapPin, title: 'Campus Address', value: 'Academic City', sub: 'Building 7, Dubai', theme: { text: 'text-coral', bg: 'bg-coral/10' }, href: '#map' },
-                    { icon: MessageSquare, title: 'WhatsApp', value: '+971 50 555 1234', sub: 'Quick queries', theme: { text: 'text-success', bg: 'bg-success/10' }, href: 'https://wa.me/971505551234' },
+                    { icon: MapPin, title: 'Campus Address', value: 'Academic City', sub: 'Building 7, Syria', theme: { text: 'text-coral', bg: 'bg-coral/10' }, href: '#map' },
+                    { icon: MessageSquare, title: 'WhatsApp', value: '+963 994 416 080', sub: 'Quick queries', theme: { text: 'text-success', bg: 'bg-success/10' }, href: 'https://wa.me/963994416080' },
                   ].map(({ icon: Icon, title, value, sub, theme, href }) => (
                     <a key={title} href={href} className="bg-card rounded-3xl p-6 border border-border hover:shadow-lg transition-all duration-300 block group">
                       <div className={`w-12 h-12 rounded-2xl flex items-center justify-center mb-5 group-hover:scale-110 transition-transform ${theme.bg}`}>
@@ -134,7 +118,7 @@ export default function SupportContactPage() {
                 </div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
-                  {/* MESSAGE FORM */}
+                  {/* MESSAGE FORM (Formspree) */}
                   <div className="lg:col-span-2">
                     <h2 className="text-3xl font-extrabold text-foreground mb-3">Send Us a Direct Message</h2>
                     <p className="text-muted-foreground mb-8">Fill out the form below and the relevant department will respond within one business day.</p>
@@ -228,7 +212,7 @@ export default function SupportContactPage() {
           </motion.div>
         )}
 
-        {/* ================= SUPPORT TAB ================= */}
+        {/* ================= SUPPORT TAB (FAQs & Categories Only) ================= */}
         {activeTab === 'support' && (
           <motion.div key="support" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.3 }}>
             
@@ -238,7 +222,7 @@ export default function SupportContactPage() {
                 {/* CATEGORIES */}
                 <div className="text-center mb-12">
                   <h2 className="text-3xl font-extrabold text-foreground mb-3">Support Categories</h2>
-                  <p className="text-muted-foreground">Select a category to route your ticket to the right experts.</p>
+                  <p className="text-muted-foreground">Explore our main help categories for quick answers.</p>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-20">
                   {supportCategories.map(({ icon: Icon, title, desc, theme, tickets }) => (
@@ -247,7 +231,7 @@ export default function SupportContactPage() {
                         <div className={`w-12 h-12 rounded-2xl flex items-center justify-center ${theme.bg}`}>
                           <Icon className={`w-6 h-6 ${theme.text}`} />
                         </div>
-                        <span className={`text-xs font-bold px-3 py-1 rounded-full ${theme.bg} ${theme.text}`}>{tickets} open</span>
+                        <span className={`text-xs font-bold px-3 py-1 rounded-full ${theme.bg} ${theme.text}`}>{tickets} topics</span>
                       </div>
                       <h4 className="font-bold text-lg text-foreground mb-2">{title}</h4>
                       <p className="text-sm text-muted-foreground leading-relaxed">{desc}</p>
@@ -256,7 +240,7 @@ export default function SupportContactPage() {
                 </div>
 
                 {/* FAQ SECTION */}
-                <div className="max-w-3xl mx-auto mb-20">
+                <div className="max-w-3xl mx-auto">
                   <div className="text-center mb-10">
                     <h3 className="font-extrabold text-2xl text-foreground">Frequently Asked Questions</h3>
                   </div>
@@ -289,54 +273,6 @@ export default function SupportContactPage() {
                   </div>
                 </div>
 
-                {/* TICKET FORM */}
-                <div className="max-w-3xl mx-auto bg-card rounded-3xl p-8 sm:p-12 border border-border shadow-lg">
-                  <h3 className="font-extrabold text-2xl text-foreground mb-2 text-center">Submit a Support Ticket</h3>
-                  <p className="text-muted-foreground mb-8 text-center">Need direct help? Fill out the ticket form and we'll get back within 4 hours.</p>
-
-                  {ticketSubmitted ? (
-                    <div className="bg-success/5 rounded-3xl p-10 text-center border border-success/20">
-                      <CheckCircle className="w-14 h-14 text-success mx-auto mb-4" />
-                      <h4 className="font-bold text-xl text-foreground mb-2">Ticket Submitted Successfully!</h4>
-                      <p className="text-muted-foreground">We've sent a confirmation to <span className="font-medium text-foreground">{ticketForm.email}</span>.</p>
-                      <button onClick={() => setTicketSubmitted(false)} className="mt-6 text-primary font-bold hover:underline">Submit another ticket</button>
-                    </div>
-                  ) : (
-                    <form onSubmit={handleTicketSubmit} className="space-y-5">
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                        <div>
-                           <label className="block text-sm font-semibold text-foreground mb-2">Full Name</label>
-                           <input type="text" required value={ticketForm.name} onChange={e => setTicketForm(f => ({ ...f, name: e.target.value }))} className="w-full px-4 py-3 rounded-xl border border-border bg-background focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary text-sm transition-all text-foreground" />
-                        </div>
-                        <div>
-                           <label className="block text-sm font-semibold text-foreground mb-2">Email Address</label>
-                           <input type="email" required value={ticketForm.email} onChange={e => setTicketForm(f => ({ ...f, email: e.target.value }))} className="w-full px-4 py-3 rounded-xl border border-border bg-background focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary text-sm transition-all text-foreground" />
-                        </div>
-                      </div>
-                      <div>
-                        <label className="block text-sm font-semibold text-foreground mb-2">Category</label>
-                        <div className="relative">
-                          <select value={ticketForm.category} onChange={e => setTicketForm(f => ({ ...f, category: e.target.value }))} className="w-full px-4 py-3 pr-10 rounded-xl border border-border bg-background focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary text-sm font-medium appearance-none cursor-pointer transition-all text-foreground">
-                            {['Technical Support', 'Academic Support', 'Counseling Support', 'Finance Support'].map(c => <option key={c}>{c}</option>)}
-                          </select>
-                          <ChevronDown className="w-4 h-4 absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none" />
-                        </div>
-                      </div>
-                      <div>
-                        <label className="block text-sm font-semibold text-foreground mb-2">Subject</label>
-                        <input type="text" required value={ticketForm.subject} onChange={e => setTicketForm(f => ({ ...f, subject: e.target.value }))} className="w-full px-4 py-3 rounded-xl border border-border bg-background focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary text-sm transition-all text-foreground" />
-                      </div>
-                      <div>
-                        <label className="block text-sm font-semibold text-foreground mb-2">Description</label>
-                        <textarea required rows={5} value={ticketForm.message} onChange={e => setTicketForm(f => ({ ...f, message: e.target.value }))} className="w-full px-4 py-3 rounded-xl border border-border bg-background focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary text-sm resize-none transition-all text-foreground" />
-                      </div>
-                      <button type="submit" className="w-full py-4 rounded-xl bg-primary text-primary-foreground font-bold shadow-md hover:opacity-95 transition-opacity">
-                        Submit Support Ticket
-                      </button>
-                    </form>
-                  )}
-                </div>
-
               </div>
             </section>
           </motion.div>
@@ -352,9 +288,9 @@ export default function SupportContactPage() {
                 <MapPin className="w-8 h-8 text-primary-foreground" />
               </div>
               <p className="font-extrabold text-xl text-foreground mb-1">Madrasaty Academy</p>
-              <p className="text-sm text-muted-foreground mb-5">Academic City, Dubai, UAE</p>
+              <p className="text-sm text-muted-foreground mb-5">Academic City, Syria</p>
               <a
-                href="https://maps.google.com/?q=Academic+City+Dubai"
+                href="https://maps.google.com/?q=Academic+City+Syria"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground hover:opacity-90 transition-opacity font-bold text-sm shadow-md"

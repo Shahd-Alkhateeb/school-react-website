@@ -129,9 +129,9 @@ export default function AboutPage() {
                 A Message from Our Principal
               </motion.h2>
               <motion.div variants={fadeUp} className="space-y-4 text-muted-foreground leading-relaxed text-lg">
-                <p>At Nova Academy, we believe that every child is a unique constellation of talents, curiosity, and potential. Our role is not simply to educate — it is to illuminate.</p>
+                <p>At Madrasaty Academy, we believe that every child is a unique constellation of talents, curiosity, and potential. Our role is not simply to educate — it is to illuminate.</p>
                 <p>Over the past 28 years, we have built a community where innovation and tradition coexist beautifully. Our Cambridge-accredited curriculum provides academic rigor, while our technology-enhanced learning environment prepares students for a world we cannot yet fully imagine.</p>
-                <p>I invite you to explore Nova Academy — not just as a school, but as a launchpad for your child's lifelong journey of discovery. Together, we will build something extraordinary.</p>
+                <p>I invite you to explore Madrasaty Academy — not just as a school, but as a launchpad for your child's lifelong journey of discovery. Together, we will build something extraordinary.</p>
               </motion.div>
               <motion.div variants={fadeUp} className="mt-8">
                 <p className="font-bold text-lg text-foreground">Dr. Sarah Al-Hassan</p>
@@ -182,23 +182,27 @@ export default function AboutPage() {
       </section>
 
       {/* ACHIEVEMENTS */}
-      <section className="py-24 bg-primary text-primary-foreground relative overflow-hidden">
-        <div className="absolute inset-0 bg-black/10 mix-blend-overlay pointer-events-none" />
+      <section className="py-24 bg-sidebar text-sidebar-foreground border-y border-white/10 relative overflow-hidden">
+
+        <div className="absolute top-0 right-0 w-96 h-96 bg-primary/15 blur-[120px] rounded-full pointer-events-none" />
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-teal/10 blur-[120px] rounded-full pointer-events-none" />
+
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger} className="text-center mb-14">
-            <motion.h2 variants={fadeUp} className="text-3xl md:text-4xl font-extrabold mb-4">
-              By the Numbers
+            <motion.h2 variants={fadeUp} className="text-3xl md:text-4xl font-extrabold text-sidebar-foreground mb-4">
+             By the number
             </motion.h2>
-            <motion.p variants={fadeUp} className="text-lg text-primary-foreground/80 max-w-2xl mx-auto">
-              Our achievements speak for themselves.
-            </motion.p>
+            <motion.p variants={fadeUp} className="text-lg text-sidebar-muted max-w-2xl mx-auto">
+              Our achievements reflect our commitment to excellence, innovation, and the holistic development of every student.
+             </motion.p>
           </motion.div>
+          
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger} className="grid grid-cols-2 lg:grid-cols-4 gap-8">
             {achievements.map(({ value, label, sublabel }) => (
               <motion.div key={label} variants={fadeUp} className="text-center">
-                <p className="text-5xl md:text-6xl font-extrabold mb-3">{value}</p>
-                <p className="font-bold text-lg mb-1">{label}</p>
-                <p className="text-sm text-primary-foreground/70 font-medium">{sublabel}</p>
+                <p className="text-5xl md:text-6xl font-extrabold text-sidebar-foreground mb-3">{value}</p>
+                <p className="font-bold text-lg text-white mb-1">{label}</p>
+                <p className="text-sm text-sidebar-muted font-medium">{sublabel}</p>
               </motion.div>
             ))}
           </motion.div>

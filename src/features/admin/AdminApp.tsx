@@ -1,16 +1,16 @@
 import { useState } from 'react';
-import Sidebar from '../../../app/components/Sidebar';
-import StatsCard from '../../../app/components/StatsCard';
-import AttendanceCard from '../../../app/components/AttendanceCard';
-import AssignmentCard from '../../../app/components/AssignmentCard';
-import SchoolMomentCard from '../../../app/components/SchoolMomentCard';
-import AttendanceChart from '../../../app/components/AttendanceChart';
-import RecentActivities from '../../../app/components/RecentActivities';
-import LoginPage from '../../auth/components/LoginPage';
-import ForgotPasswordPage from '../../auth/components/ForgotPasswordPage';
-import OTPPage from '../../auth/components/OTPPage';
-import ResetPasswordPage from '../../auth/components/ResetPasswordPage';
-import SuccessPage from '../../auth/components/SuccessPage';
+import Sidebar from '../../app/components/Sidebar';
+import StatsCard from '../../app/components/StatsCard';
+import AttendanceCard from '../../app/components/AttendanceCard';
+import AssignmentCard from '../../app/components/AssignmentCard';
+import SchoolMomentCard from '../../app/components/SchoolMomentCard';
+import AttendanceChart from '../../app/components/AttendanceChart';
+import RecentActivities from '../../app/components/RecentActivities';
+import LoginPage from '../auth/components/LoginPage';
+import ForgotPasswordPage from '../auth/components/ForgotPasswordPage';
+import OTPPage from '../auth/components/OTPPage';
+import ResetPasswordPage from '../auth/components/ResetPasswordPage';
+import SuccessPage from '../auth/components/SuccessPage';
 import { Users, BookOpen, GraduationCap, Calendar, Search, Bell, FileText } from 'lucide-react';
 
 type AuthView = 'login' | 'forgot-password' | 'otp' | 'reset-password' | 'success' | 'dashboard';

@@ -1,11 +1,11 @@
 import { createBrowserRouter } from 'react-router';
-import WebsiteLayout from '../features/website/components/layout/WebsiteLayout';
+import WebsiteLayout from '../features/website/layout/WebsiteLayout';
 import HomePage from '../features/website/pages/HomePage';
 import AboutPage from '../features/website/pages/AboutPage';
 import ActivitiesEventsPage from '../features/website/pages/ActivitiesEventsPage';
 import AdmissionsPage from '../features/website/pages/AdmissionsPage';
 import SupportContactPage from '../features/website/pages/SupportContactPage';
-import AdminApp from '../features/admin/components/AdminApp';
+import AdminApp from '../features/admin/AdminApp';
 
 export const router = createBrowserRouter([
   {
