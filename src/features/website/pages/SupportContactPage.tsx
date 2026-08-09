@@ -14,11 +14,8 @@ const stagger = { visible: { transition: { staggerChildren: 0.08 } } };
 
 const departments = [
   { id: 'admissions', label: 'Admissions Office', email: 'admissions@madrasaty.edu', phone: '+963 998 531 853' },
-  { id: 'finance', label: 'Finance Department', email: 'finance@madrasaty.edu', phone: '+963 990 781 188' },
   { id: 'academic', label: 'Academic Affairs', email: 'academic@madrasaty.edu', phone: '+963 994 488 707' },
-  { id: 'counseling', label: 'Student Counseling', email: 'counseling@madrasaty.edu', phone: '+963 996 878 505' },
   { id: 'technical', label: 'Technical Support', email: 'support@madrasaty.edu', phone: '+963 933 606 808' },
-  { id: 'principal', label: "Principal's Office", email: 'principal@madrasaty.edu', phone: '+963 997 606 454' },
 ];
 
 const supportCategories = [
@@ -103,7 +100,7 @@ export default function SupportContactPage() {
                   {[
                     { icon: Phone, title: 'Main Reception', value: '+963 994 416 080', sub: 'Sun–Thu, 7 AM – 5 PM', theme: { text: 'text-primary', bg: 'bg-primary/10' }, href: 'tel:+963994416080' },
                     { icon: Mail, title: 'General Enquiries', value: 'info@madrasaty.edu', sub: 'Response within 24h', theme: { text: 'text-teal', bg: 'bg-teal/10' }, href: 'mailto:info@madrasaty.edu' },
-                    { icon: MapPin, title: 'Campus Address', value: 'Academic City', sub: 'Building 7, Syria', theme: { text: 'text-coral', bg: 'bg-coral/10' }, href: '#map' },
+                    { icon: MapPin, title: 'Address', value: 'Damascus-AlMazza', sub: 'Building 7, Syria', theme: { text: 'text-coral', bg: 'bg-coral/10' }, href: '#map' },
                     { icon: MessageSquare, title: 'WhatsApp', value: '+963 994 416 080', sub: 'Quick queries', theme: { text: 'text-success', bg: 'bg-success/10' }, href: 'https://wa.me/963994416080' },
                   ].map(({ icon: Icon, title, value, sub, theme, href }) => (
                     <a key={title} href={href} className="bg-card rounded-3xl p-6 border border-border hover:shadow-lg transition-all duration-300 block group">

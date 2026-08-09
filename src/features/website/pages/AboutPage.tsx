@@ -25,16 +25,9 @@ const timeline = [
   { year: '2008', title: '1000 Students Milestone', desc: 'Enrolled our 1,000th student and opened a new science and technology wing.' },
   { year: '2015', title: 'Smart Campus Launch', desc: 'Launched our digital-first campus with smart classrooms and the first School ERP system.' },
   { year: '2020', title: 'AI Learning Platform', desc: 'Introduced AI-powered personalized learning tools adopted by all grade levels.' },
-  { year: '2024', title: 'Regional #1 Ranking', desc: 'Ranked the #1 school in the region by the Ministry of Education Excellence Award.' },
-  { year: '2026', title: 'New Science Center', desc: 'Opening our state-of-the-art Science & Innovation Center with robotics lab and maker space.' },
+  
 ];
 
-const achievements = [
-  { value: '28', label: 'National Awards', sublabel: 'Academic excellence recognition' },
-  { value: '15+', label: 'University Partners', sublabel: 'Global university partnerships' },
-  { value: '98%', label: 'University Acceptance', sublabel: 'Of graduating students' },
-  { value: '12', label: 'International Programs', sublabel: 'Exchange & enrichment programs' },
-];
 
 export default function AboutPage() {
   return (
@@ -181,53 +174,8 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* ACHIEVEMENTS */}
-      <section className="py-24 bg-sidebar text-sidebar-foreground border-y border-white/10 relative overflow-hidden">
-
-        <div className="absolute top-0 right-0 w-96 h-96 bg-primary/15 blur-[120px] rounded-full pointer-events-none" />
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-teal/10 blur-[120px] rounded-full pointer-events-none" />
-
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger} className="text-center mb-14">
-            <motion.h2 variants={fadeUp} className="text-3xl md:text-4xl font-extrabold text-sidebar-foreground mb-4">
-             By the number
-            </motion.h2>
-            <motion.p variants={fadeUp} className="text-lg text-sidebar-muted max-w-2xl mx-auto">
-              Our achievements reflect our commitment to excellence, innovation, and the holistic development of every student.
-             </motion.p>
-          </motion.div>
-          
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger} className="grid grid-cols-2 lg:grid-cols-4 gap-8">
-            {achievements.map(({ value, label, sublabel }) => (
-              <motion.div key={label} variants={fadeUp} className="text-center">
-                <p className="text-5xl md:text-6xl font-extrabold text-sidebar-foreground mb-3">{value}</p>
-                <p className="font-bold text-lg text-white mb-1">{label}</p>
-                <p className="text-sm text-sidebar-muted font-medium">{sublabel}</p>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section className="py-20 bg-background text-center border-b border-border">
-        <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger} className="max-w-2xl mx-auto px-4">
-          <motion.h2 variants={fadeUp} className="text-3xl md:text-4xl font-extrabold text-foreground mb-4">
-            Ready to be Part of the Nova Story?
-          </motion.h2>
-          <motion.p variants={fadeUp} className="text-lg text-muted-foreground mb-8">
-            Join our community of 1,500+ students and families building the future together.
-          </motion.p>
-          <motion.div variants={fadeUp} className="flex flex-wrap justify-center gap-4">
-            <Link to="/admissions" className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-primary text-primary-foreground hover:opacity-90 transition-opacity font-bold shadow-md">
-              Apply Now <ArrowRight className="w-5 h-5" />
-            </Link>
-            <Link to="/support-contact" className="inline-flex items-center gap-2 px-8 py-4 rounded-xl border border-border bg-card text-foreground hover:bg-muted transition-colors font-bold shadow-sm">
-              Contact Us
-            </Link>
-          </motion.div>
-        </motion.div>
-      </section>
+      
+    
     </div>
   );
 }
