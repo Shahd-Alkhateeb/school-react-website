@@ -1,12 +1,11 @@
 import { motion } from 'motion/react';
-import { Link } from 'react-router';
-import { Heart, Eye, Target, Award, BookOpen, Users, Globe, Star, ArrowRight } from 'lucide-react';
+import { Heart, Eye, Target, BookOpen, Users, Globe, Star } from 'lucide-react';
+import { useWebsiteContent } from '../hooks/useWebsiteContent';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 32 },
   visible: { 
-    opacity: 1, 
-    y: 0, 
+    opacity: 1, y: 0, 
     transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] as const } 
   },
 };
@@ -25,11 +24,12 @@ const timeline = [
   { year: '2008', title: '1000 Students Milestone', desc: 'Enrolled our 1,000th student and opened a new science and technology wing.' },
   { year: '2015', title: 'Smart Campus Launch', desc: 'Launched our digital-first campus with smart classrooms and the first School ERP system.' },
   { year: '2020', title: 'AI Learning Platform', desc: 'Introduced AI-powered personalized learning tools adopted by all grade levels.' },
-  
 ];
 
-
 export default function AboutPage() {
+  const { data } = useWebsiteContent();
+  const content = data?.about_page;
+
   return (
     <div>
       {/* HERO SECTION */}
@@ -42,16 +42,13 @@ export default function AboutPage() {
           <motion.div initial="hidden" animate="visible" variants={stagger} className="max-w-3xl">
             <motion.span variants={fadeUp} className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary mb-6 text-sm font-semibold border border-primary/20">
               <BookOpen className="w-4 h-4" />
-              Our Story
+              {content?.hero?.badge || 'Our Story'}
             </motion.span>
             <motion.h1 variants={fadeUp} className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-foreground tracking-tight leading-tight mb-6">
-              Building a Legacy of{' '}
-              <span className="bg-clip-text text-transparent bg-gradient-to-br from-primary to-teal">
-                Academic Excellence
-              </span>
+              {content?.hero?.title || 'Building a Legacy of Academic Excellence'}
             </motion.h1>
             <motion.p variants={fadeUp} className="text-lg text-muted-foreground leading-relaxed">
-              Since 1998, Madrasaty Academy has been shaping the minds of tomorrow's leaders. We combine rigorous Cambridge academics with cutting-edge technology and a nurturing environment to help every student reach their full potential.
+              {content?.hero?.description || "Since 1998, Madrasaty Academy has been shaping the minds of tomorrow's leaders. We combine rigorous Cambridge academics with cutting-edge technology and a nurturing environment to help every student reach their full potential."}
             </motion.p>
           </motion.div>
         </div>
@@ -62,9 +59,9 @@ export default function AboutPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-24">
             {[
-              { icon: Target, title: 'Our Mission', theme: { text: 'text-primary', bg: 'bg-primary/5', border: 'border-primary/20' }, desc: 'To provide an exceptional, technology-enhanced education that develops critical thinkers, compassionate leaders, and lifelong learners.' },
-              { icon: Eye, title: 'Our Vision', theme: { text: 'text-teal', bg: 'bg-teal/5', border: 'border-teal/20' }, desc: 'To be the leading innovative school in the region, recognized globally for academic excellence and character development.' },
-              { icon: Star, title: 'Our Promise', theme: { text: 'text-coral', bg: 'bg-coral/5', border: 'border-coral/20' }, desc: 'Every student receives personalized attention, world-class resources, and the support needed to discover their unique strengths.' },
+              { icon: Target, title: content?.mission_vision?.mission?.title || 'Our Mission', theme: { text: 'text-primary', bg: 'bg-primary/5', border: 'border-primary/20' }, desc: 'To provide an exceptional, technology-enhanced education that develops critical thinkers, compassionate leaders, and lifelong learners.' },
+              { icon: Eye, title: content?.mission_vision?.vision?.title || 'Our Vision', theme: { text: 'text-teal', bg: 'bg-teal/5', border: 'border-teal/20' }, desc: 'To be the leading innovative school in the region, recognized globally for academic excellence and character development.' },
+              { icon: Star, title: content?.mission_vision?.promise?.title || 'Our Promise', theme: { text: 'text-coral', bg: 'bg-coral/5', border: 'border-coral/20' }, desc: 'Every student receives personalized attention, world-class resources, and the support needed to discover their unique strengths.' },
             ].map(({ icon: Icon, title, theme, desc }) => (
               <motion.div key={title} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className={`rounded-3xl p-8 border ${theme.border} ${theme.bg} shadow-sm`}>
                 <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-6 bg-background shadow-sm ${theme.text}`}>
@@ -78,9 +75,11 @@ export default function AboutPage() {
 
           {/* Core Values */}
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger} className="text-center mb-12">
-            <motion.h2 variants={fadeUp} className="text-3xl md:text-4xl font-extrabold text-foreground mb-4">Core Values</motion.h2>
+            <motion.h2 variants={fadeUp} className="text-3xl md:text-4xl font-extrabold text-foreground mb-4">
+              {content?.core_values?.title || 'Core Values'}
+            </motion.h2>
             <motion.p variants={fadeUp} className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              These principles guide every decision we make and every interaction we have.
+              {content?.core_values?.description || 'These principles guide every decision we make and every interaction we have.'}
             </motion.p>
           </motion.div>
           
@@ -116,10 +115,10 @@ export default function AboutPage() {
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
               <motion.span variants={fadeUp} className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary mb-6 text-sm font-semibold border border-primary/20">
                 <Users className="w-4 h-4" />
-                Principal's Message
+                {content?.principal_message?.badge || "Principal's Message"}
               </motion.span>
               <motion.h2 variants={fadeUp} className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-foreground leading-tight mb-6">
-                A Message from Our Principal
+                {content?.principal_message?.title || 'A Message from Our Principal'}
               </motion.h2>
               <motion.div variants={fadeUp} className="space-y-4 text-muted-foreground leading-relaxed text-lg">
                 <p>At Madrasaty Academy, we believe that every child is a unique constellation of talents, curiosity, and potential. Our role is not simply to educate — it is to illuminate.</p>
@@ -140,10 +139,10 @@ export default function AboutPage() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger} className="text-center mb-16">
             <motion.h2 variants={fadeUp} className="text-3xl md:text-4xl font-extrabold text-foreground mb-4">
-              Our Journey Through the Years
+              {content?.timeline_section?.title || 'Our Journey Through the Years'}
             </motion.h2>
             <motion.p variants={fadeUp} className="text-lg text-muted-foreground">
-              From a small campus with big dreams to a regional leader in education.
+              {content?.timeline_section?.description || 'From a small campus with big dreams to a regional leader in education.'}
             </motion.p>
           </motion.div>
 
@@ -173,9 +172,6 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
-
-      
-    
     </div>
   );
 }

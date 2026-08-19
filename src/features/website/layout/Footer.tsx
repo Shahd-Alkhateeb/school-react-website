@@ -1,21 +1,6 @@
 import { Link } from 'react-router';
 import { GraduationCap, Facebook, Instagram, Linkedin, Youtube, Mail, Phone, MapPin } from 'lucide-react';
-
-const sections = [
-  {
-    title: 'School',
-    links: [
-      { label: 'About Us', path: '/about' },
-      { label: 'Activities & Events', path: '/activities-events' },
-    ],
-  },
-  {
-    title: 'Support & Contact',
-    links: [
-      { label: 'Contact Us for Help', path: '/support-contact' },
-    ],
-  },
-];
+import { useWebsiteContent } from '../hooks/useWebsiteContent';
 
 const socials = [
   { icon: Facebook, href: '#', label: 'Facebook' },
@@ -25,9 +10,31 @@ const socials = [
 ];
 
 export function Footer() {
+  const { data } = useWebsiteContent();
+  const global = data?.global;
+
+  const brandName = global?.brand_name || 'Madrasaty Academy';
+  const description = global?.footer?.description || "Empowering tomorrow's leaders through innovation, excellence, and a holistic education experience.";
+  const copyright = global?.footer?.copyright || "© 2026 Madrasaty Academy. All rights reserved.";
+
+  const sections = [
+    {
+      title: global?.footer?.sections?.school || 'School',
+      links: [
+        { label: global?.navbar?.links?.about || 'About Us', path: '/about' },
+        { label: global?.navbar?.links?.activities_events || 'Activities & Events', path: '/activities-events' },
+      ],
+    },
+    {
+      title: global?.footer?.sections?.support_contact || 'Support & Contact',
+      links: [
+        { label: global?.navbar?.links?.support_contact || 'Support & Contact', path: '/support-contact' },
+      ],
+    },
+  ];
+
   return (
     <footer className="bg-sidebar border-t border-white/5">
-
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-8">
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 mb-12">
           <div className="lg:col-span-2">
@@ -35,10 +42,10 @@ export function Footer() {
               <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center shadow-md group-hover:scale-105 transition-transform">
                 <GraduationCap className="w-6 h-6 text-white" />
               </div>
-              <span className="font-extrabold text-xl text-white">Madrasaty Academy</span>
+              <span className="font-extrabold text-xl text-white">{brandName}</span>
             </Link>
             <p className="text-sm text-sidebar-muted leading-relaxed mb-6 max-w-sm">
-              Empowering tomorrow's leaders through innovation, excellence, and a holistic education experience.
+              {description}
             </p>
             <div className="space-y-3">
               <a href="mailto:info@novaacademy.edu" className="flex items-center gap-3 text-sm text-sidebar-muted hover:text-white transition-colors">
@@ -81,7 +88,7 @@ export function Footer() {
 
         <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-sm text-sidebar-muted font-medium">
-            © 2026 Madrasaty Academy. All rights reserved.
+            {copyright}
           </p>
           <div className="flex items-center gap-3">
             {socials.map(({ icon: Icon, href, label }) => (

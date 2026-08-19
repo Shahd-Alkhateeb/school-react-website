@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router';
 import { motion } from 'motion/react';
+import { useWebsiteContent } from '../hooks/useWebsiteContent';
+import { useWebsiteStats } from '../hooks/useWebsiteStats'; 
 import {
   ArrowRight, Star, Brain, Users, BookOpen, Bell, BarChart3, Shield,
   Smartphone, GraduationCap, Award, Globe, Zap, TrendingUp, CheckCircle,
@@ -47,14 +49,7 @@ function AnimatedCounter({ target, suffix = '', duration = 2000 }: { target: num
   return <span ref={ref}>{count.toLocaleString()}{suffix}</span>;
 }
 
-const stats = [
-  { value: 1500, suffix: '+', label: 'Students Enrolled', icon: Users },
-  { value: 120, suffix: '+', label: 'Expert Teachers', icon: GraduationCap },
-  { value: 30, suffix: '+', label: 'Clubs & Activities', icon: Award },
-  { value: 95, suffix: '%', label: 'Graduation Rate', icon: TrendingUp },
-];
-
-const features = [
+const featuresList = [
   { icon: Brain, title: 'Smart School ERP', desc: 'Complete enterprise resource planning for seamless operations.', theme: { text: 'text-primary', bg: 'bg-primary/10' } },
   { icon: Users, title: 'Parent Portal', desc: 'Real-time updates on attendance, grades, and announcements.', theme: { text: 'text-coral', bg: 'bg-coral/10' } },
   { icon: BookOpen, title: 'Student Portal', desc: 'Personalized learning hub with assignments and progress tracking.', theme: { text: 'text-royal-blue', bg: 'bg-royal-blue/10' } },
@@ -80,7 +75,7 @@ const testimonials = [
   { name: 'Layla Nour', role: 'Grade 12 Student', avatar: 'LN', theme: 'bg-royal-blue', quote: 'I won a full scholarship to UCL thanks to the academic foundation Madrasaty Academy gave me.', rating: 5 },
 ];
 
-const achievements = [
+const achievementsList = [
   { value: '28', label: 'National Awards', sublabel: 'Academic excellence recognition' },
   { value: '15+', label: 'University Partners', sublabel: 'Global university partnerships' },
   { value: '98%', label: 'University Acceptance', sublabel: 'Of graduating students' },
@@ -89,6 +84,19 @@ const achievements = [
 
 export default function HomePage() {
   const [testimonialIndex, setTestimonialIndex] = useState(0);
+  
+
+  const { data } = useWebsiteContent();
+  const { data: statsData } = useWebsiteStats(); 
+  const content = data?.home_page;
+
+
+  const stats = [
+    { value: statsData?.total_students ?? 1500, suffix: '+', label: 'Students Enrolled', icon: Users },
+    { value: statsData?.total_staff ?? 120, suffix: '+', label: 'Expert Teachers', icon: GraduationCap },
+    { value: statsData?.clubs_count ?? 30, suffix: '+', label: 'Clubs & Activities', icon: Award }, // إذا لم تكن موجودة بالباك إند تبقى افتراضية
+    { value: statsData?.overall_pass_rate ?? 95, suffix: '%', label: 'Graduation Rate', icon: TrendingUp },
+  ];
 
   const prev = () => setTestimonialIndex(i => (i - 1 + testimonials.length) % testimonials.length);
   const next = () => setTestimonialIndex(i => (i + 1) % testimonials.length);
@@ -114,33 +122,33 @@ export default function HomePage() {
               <motion.div variants={fadeUp}>
                 <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary mb-6 text-sm font-semibold border border-primary/20">
                   <Star className="w-4 h-4" />
-                  #1 Ranked School in the Region 2026
+                  {content?.hero?.badge || '#1 Ranked School in the Region 2026'}
                 </span>
               </motion.div>
 
               <motion.h1 variants={fadeUp} className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-foreground leading-tight tracking-tight mb-6">
-                Empowering{' '}
+                {content?.hero?.title_part_1 || 'Empowering'}{' '}
                 <span className="text-primary">
-                  Tomorrow's
+                  {content?.hero?.title_highlight || "Tomorrow's"}
                 </span>
-                {' '}Leaders Today
+                {' '}{content?.hero?.title_part_2 || 'Leaders Today'}
               </motion.h1>
 
               <motion.p variants={fadeUp} className="text-lg text-muted-foreground leading-relaxed mb-10 max-w-xl">
-                Madrasaty Academy combines world-class Cambridge education with cutting-edge technology to deliver a transformative learning experience for students from seventh to Grade 12.
+                {content?.hero?.description || 'Madrasaty Academy combines world-class Cambridge education with cutting-edge technology to deliver a transformative learning experience for students from seventh to Grade 12.'}
               </motion.p>
 
               <motion.div variants={fadeUp} className="flex flex-wrap gap-4">
-
                 <Link to="/support-contact" className="bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-4 rounded-xl font-bold inline-flex items-center justify-center transition-colors shadow-sm gap-2">
-                  Contact Us
+                  {content?.hero?.buttons?.contact || 'Contact Us'}
                   <ArrowRight className="w-5 h-5" />
                 </Link>
                 <Link to="/about" className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl border border-border bg-card text-foreground hover:bg-muted transition-colors font-bold shadow-sm">
-                  Discover More
+                  {content?.hero?.buttons?.discover || 'Discover More'}
                 </Link>
               </motion.div>
 
+              {/* Tust / Ratings Section */}
               <motion.div variants={fadeUp} className="mt-12 flex items-center gap-6">
                 <div className="flex -space-x-3">
                   {visible.map((t, i) => (
@@ -199,7 +207,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* STATS SECTION*/}
+      {/* STATS SECTION */}
       <section className="py-16 bg-card border-y border-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div 
@@ -234,21 +242,21 @@ export default function HomePage() {
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-100px' }} variants={stagger} className="text-center mb-16">
             <motion.span variants={fadeUp} className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary mb-4 text-sm font-semibold border border-primary/20">
               <Zap className="w-4 h-4" />
-              Powered by Smart ERP
+              {content?.features_section?.badge || 'Powered by Smart ERP'}
             </motion.span>
             <motion.h2 variants={fadeUp} className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-foreground leading-tight mb-4">
-              Everything Your School Needs,<br />
+              {content?.features_section?.title?.split(',')[0] || 'Everything Your School Needs'},<br />
               <span className="text-primary">
-                In One Platform
+                {content?.features_section?.title?.split(',')[1] || 'In One Platform'}
               </span>
             </motion.h2>
             <motion.p variants={fadeUp} className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Our integrated School ERP ecosystem brings together every aspect of school management into a single, intuitive platform.
+              {content?.features_section?.description || 'Our integrated School ERP ecosystem brings together every aspect of school management into a single, intuitive platform.'}
             </motion.p>
           </motion.div>
 
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-100px' }} variants={stagger} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {features.map(({ icon: Icon, title, desc, theme }) => (
+            {featuresList.map(({ icon: Icon, title, desc, theme }) => (
               <motion.div key={title} variants={fadeUp} className="bg-card rounded-3xl p-6 border border-border hover:shadow-md transition-shadow">
                 <div className={`w-14 h-14 rounded-2xl mb-5 flex items-center justify-center ${theme.bg}`}>
                   <Icon className={`w-7 h-7 ${theme.text}`} />
@@ -272,9 +280,7 @@ export default function HomePage() {
               </motion.span>
               <motion.h2 variants={fadeUp} className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-foreground leading-tight mb-5">
                 The Future of Education is{' '}
-                <span className="text-primary">
-                  Already Here
-                </span>
+                <span className="text-primary">Already Here</span>
               </motion.h2>
               <motion.p variants={fadeUp} className="text-lg text-muted-foreground leading-relaxed mb-10">
                 We don't just teach — we prepare students for the real world through a blend of rigorous academics, technology, and character development.
@@ -315,24 +321,23 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ✅ ACHIEVEMENTS*/}
+      {/* ACHIEVEMENTS */}
       <section className="py-24 bg-sidebar text-sidebar-foreground border-y border-white/10 relative overflow-hidden">
-
         <div className="absolute top-0 right-0 w-96 h-96 bg-primary/15 blur-[120px] rounded-full pointer-events-none" />
         <div className="absolute bottom-0 left-0 w-96 h-96 bg-teal/10 blur-[120px] rounded-full pointer-events-none" />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-100px' }} variants={stagger} className="text-center mb-16">
             <motion.h2 variants={fadeUp} className="text-3xl md:text-5xl font-extrabold text-sidebar-foreground leading-tight mb-4">
-              By the Numbers
+              {content?.achievements_section?.title || 'By the Numbers'}
             </motion.h2>
             <motion.p variants={fadeUp} className="text-lg text-sidebar-muted max-w-2xl mx-auto">
-              Our achievements speak for themselves.
+              {content?.achievements_section?.description || 'Our achievements speak for themselves.'}
             </motion.p>
           </motion.div>
 
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-100px' }} variants={stagger} className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {achievements.map(({ value, label, sublabel }) => (
+            {achievementsList.map(({ value, label, sublabel }) => (
               <motion.div key={label} variants={fadeUp} className="text-center">
                 <p className="text-5xl md:text-6xl font-extrabold text-sidebar-foreground mb-2">{value}</p>
                 <p className="font-bold text-lg text-white mb-1">{label}</p>
@@ -354,9 +359,6 @@ export default function HomePage() {
             <motion.h2 variants={fadeUp} className="text-3xl md:text-5xl font-extrabold text-foreground leading-tight mb-4">
               What Our Community Says
             </motion.h2>
-            <motion.p variants={fadeUp} className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Hear from students, parents, and teachers about their Madrasaty Academy experience.
-            </motion.p>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
@@ -394,8 +396,6 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
-    
     </div>
   );
 }

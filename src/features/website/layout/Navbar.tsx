@@ -2,19 +2,25 @@ import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router';
 import { motion, AnimatePresence } from 'motion/react';
 import { Menu, X, GraduationCap, Moon, Sun } from 'lucide-react';
-
-const navLinks = [
-  { label: 'Home', path: '/' },
-  { label: 'About Us', path: '/about' },
-  { label: 'Activities & Events', path: '/activities-events' },
-  { label: 'Support & Contact', path: '/support-contact' },
-];
+import { useWebsiteContent } from '../hooks/useWebsiteContent'; // 🌟 الهوك الجديد
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [isDark, setIsDark] = useState(false);
   const location = useLocation();
+
+  // 🌟 جلب الداتا الديناميكية 🌟
+  const { data } = useWebsiteContent();
+  const content = data?.global;
+
+  const brandName = content?.brand_name || 'Madrasaty Academy';
+  const navLinks = [
+    { label: content?.navbar?.links?.home || 'Home', path: '/' },
+    { label: content?.navbar?.links?.about || 'About Us', path: '/about' },
+    { label: content?.navbar?.links?.activities_events || 'Activities & Events', path: '/activities-events' },
+    { label: content?.navbar?.links?.support_contact || 'Support & Contact', path: '/support-contact' },
+  ];
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -57,7 +63,7 @@ export function Navbar() {
               <GraduationCap className="w-5 h-5 text-primary-foreground" />
             </div>
             <span className="font-extrabold text-lg text-foreground font-brand">
-              Madrasaty Academy
+              {brandName}
             </span>
           </Link>
 
@@ -83,25 +89,24 @@ export function Navbar() {
             <button
               onClick={toggleTheme}
               className="w-10 h-10 rounded-xl bg-card border border-border flex items-center justify-center text-muted-foreground hover:text-foreground transition-all shadow-sm"
-              aria-label="Toggle Theme"
+              aria-label={content?.navbar?.aria_labels?.toggle_theme || "Toggle Theme"}
             >
               {isDark ? <Sun className="w-5 h-5 text-warning" /> : <Moon className="w-5 h-5 text-primary" />}
             </button>
           </div>
 
-          {/* Mobile / Tablet Actions (Visible below xl) */}
+          {/* Mobile / Tablet Actions */}
           <div className="flex items-center gap-2 xl:hidden">
             <button
               onClick={toggleTheme}
               className="w-10 h-10 rounded-xl bg-card border border-border flex items-center justify-center text-muted-foreground hover:text-foreground shadow-sm"
-              aria-label="Toggle Theme"
             >
               {isDark ? <Sun className="w-5 h-5 text-warning" /> : <Moon className="w-5 h-5 text-primary" />}
             </button>
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
               className="w-10 h-10 rounded-xl bg-card border border-border flex items-center justify-center text-foreground shadow-sm"
-              aria-label="Toggle Menu"
+              aria-label={content?.navbar?.aria_labels?.toggle_menu || "Toggle Menu"}
             >
               {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>

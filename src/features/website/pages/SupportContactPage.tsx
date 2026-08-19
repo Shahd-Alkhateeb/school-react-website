@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { useForm } from "@formspree/react";
+import { useWebsiteContent } from '../hooks/useWebsiteContent';
 import { 
   Phone, Mail, MapPin, Clock, MessageSquare, CheckCircle, 
   ArrowRight, ChevronDown, Wrench, GraduationCap, Heart, BarChart3 
@@ -43,6 +44,9 @@ const faqs = [
 ];
 
 export default function SupportContactPage() {
+  const { data } = useWebsiteContent();
+  const content = data?.support_contact_page;
+
   const [activeTab, setActiveTab] = useState<'contact' | 'support'>('contact');
   const [state, formspreeSubmit] = useForm("xpqekbrd");
   const [form, setForm] = useState({ name: '', email: '', phone: '', department: 'admissions', subject: '', message: '' });
@@ -57,16 +61,13 @@ export default function SupportContactPage() {
           <motion.div initial="hidden" animate="visible" variants={stagger} className="max-w-3xl mx-auto">
             <motion.span variants={fadeUp} className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary mb-6 text-sm font-semibold border border-primary/20">
               <MessageSquare className="w-4 h-4" />
-              Help & Communications Hub
+              {content?.hero?.badge || 'Help & Communications Hub'}
             </motion.span>
             <motion.h1 variants={fadeUp} className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-foreground leading-tight mb-5">
-              How Can We{' '}
-              <span className="bg-clip-text text-transparent bg-gradient-to-br from-primary to-teal">
-                Assist You Today?
-              </span>
+              {content?.hero?.title || 'How Can We Assist You Today?'}
             </motion.h1>
             <motion.p variants={fadeUp} className="text-lg text-muted-foreground leading-relaxed mb-8">
-              Get in touch with our administrative departments or browse our support center. We are always here to help.
+              {content?.hero?.description || 'Get in touch with our administrative departments or browse our support center. We are always here to help.'}
             </motion.p>
 
             <motion.div variants={fadeUp} className="inline-flex p-1.5 rounded-2xl bg-card border border-border shadow-sm">
@@ -74,13 +75,13 @@ export default function SupportContactPage() {
                 onClick={() => setActiveTab('contact')}
                 className={`px-6 py-2.5 rounded-xl transition-all font-semibold text-sm ${activeTab === 'contact' ? 'bg-primary text-primary-foreground shadow-md' : 'text-muted-foreground hover:text-foreground'}`}
               >
-                Contact & Departments
+                {content?.hero?.tabs?.contact || 'Contact & Departments'}
               </button>
               <button
                 onClick={() => setActiveTab('support')}
                 className={`px-6 py-2.5 rounded-xl transition-all font-semibold text-sm ${activeTab === 'support' ? 'bg-primary text-primary-foreground shadow-md' : 'text-muted-foreground hover:text-foreground'}`}
               >
-                Support Center & FAQs
+                {content?.hero?.tabs?.support || 'Support Center & FAQs'}
               </button>
             </motion.div>
           </motion.div>
@@ -88,15 +89,12 @@ export default function SupportContactPage() {
       </section>
 
       <AnimatePresence mode="wait">
-        {/* ================= CONTACT TAB ================= */}
         {activeTab === 'contact' && (
           <motion.div key="contact" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.3 }}>
-            
             <section className="py-16 bg-background">
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                
-                {/* QUICK CONTACT CARDS */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+                  {/* ... Cards ... */}
                   {[
                     { icon: Phone, title: 'Main Reception', value: '+963 994 416 080', sub: 'Sun–Thu, 7 AM – 5 PM', theme: { text: 'text-primary', bg: 'bg-primary/10' }, href: 'tel:+963994416080' },
                     { icon: Mail, title: 'General Enquiries', value: 'info@madrasaty.edu', sub: 'Response within 24h', theme: { text: 'text-teal', bg: 'bg-teal/10' }, href: 'mailto:info@madrasaty.edu' },
@@ -115,37 +113,36 @@ export default function SupportContactPage() {
                 </div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
-                  {/* MESSAGE FORM (Formspree) */}
                   <div className="lg:col-span-2">
-                    <h2 className="text-3xl font-extrabold text-foreground mb-3">Send Us a Direct Message</h2>
-                    <p className="text-muted-foreground mb-8">Fill out the form below and the relevant department will respond within one business day.</p>
+                    <h2 className="text-3xl font-extrabold text-foreground mb-3">{content?.contact_tab?.form?.title || 'Send Us a Direct Message'}</h2>
+                    <p className="text-muted-foreground mb-8">{content?.contact_tab?.form?.description || 'Fill out the form below and the relevant department will respond within one business day.'}</p>
 
                     {state.succeeded ? (
                       <div className="bg-card rounded-3xl p-12 border border-border text-center shadow-sm">
                         <div className="w-16 h-16 rounded-full bg-success/10 flex items-center justify-center mx-auto mb-5">
                           <CheckCircle className="w-8 h-8 text-success" />
                         </div>
-                        <h3 className="font-bold text-2xl text-foreground mb-3">Message Sent!</h3>
-                        <p className="text-muted-foreground">Thank you, {form.name}! We've received your message and will reply shortly.</p>
-                        <button onClick={() => window.location.reload()} className="mt-6 font-bold text-primary hover:underline">Send another message</button>
+                        <h3 className="font-bold text-2xl text-foreground mb-3">{content?.contact_tab?.form?.success?.title || 'Message Sent!'}</h3>
+                        <p className="text-muted-foreground">{content?.contact_tab?.form?.success?.message || "We've received your message and will reply shortly."}</p>
+                        <button onClick={() => window.location.reload()} className="mt-6 font-bold text-primary hover:underline">{content?.contact_tab?.form?.success?.button || 'Send another message'}</button>
                       </div>
                     ) : (
                       <form onSubmit={formspreeSubmit} className="bg-card rounded-3xl p-8 border border-border shadow-sm space-y-5">
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                           <div>
-                            <label className="block text-sm font-semibold text-foreground mb-2">Full Name *</label>
+                            <label className="block text-sm font-semibold text-foreground mb-2">{content?.contact_tab?.form?.labels?.name || 'Full Name *'}</label>
                             <input name="name" type="text" required value={form.name} onChange={e => setForm(f => ({ ...f, name: e.target.value }))} className="w-full px-4 py-3 rounded-xl border border-border bg-background focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all text-sm text-foreground" />
                           </div>
                           <div>
-                            <label className="block text-sm font-semibold text-foreground mb-2">Email Address *</label>
+                            <label className="block text-sm font-semibold text-foreground mb-2">{content?.contact_tab?.form?.labels?.email || 'Email Address *'}</label>
                             <input name="email" type="email" required value={form.email} onChange={e => setForm(f => ({ ...f, email: e.target.value }))} className="w-full px-4 py-3 rounded-xl border border-border bg-background focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all text-sm text-foreground" />
                           </div>
                           <div>
-                            <label className="block text-sm font-semibold text-foreground mb-2">Phone Number</label>
+                            <label className="block text-sm font-semibold text-foreground mb-2">{content?.contact_tab?.form?.labels?.phone || 'Phone Number'}</label>
                             <input name="phone" type="tel" value={form.phone} onChange={e => setForm(f => ({ ...f, phone: e.target.value }))} className="w-full px-4 py-3 rounded-xl border border-border bg-background focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all text-sm text-foreground" />
                           </div>
                           <div>
-                            <label className="block text-sm font-semibold text-foreground mb-2">Department</label>
+                            <label className="block text-sm font-semibold text-foreground mb-2">{content?.contact_tab?.form?.labels?.department || 'Department'}</label>
                             <div className="relative">
                               <select name="department" value={form.department} onChange={e => setForm(f => ({ ...f, department: e.target.value }))} className="w-full px-4 py-3 pr-10 rounded-xl border border-border bg-background focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all appearance-none cursor-pointer text-sm font-medium text-foreground">
                                 {departments.map(d => <option key={d.id} value={d.id}>{d.label}</option>)}
@@ -155,24 +152,23 @@ export default function SupportContactPage() {
                           </div>
                         </div>
                         <div>
-                          <label className="block text-sm font-semibold text-foreground mb-2">Subject *</label>
-                          <input name="subject" type="text" required value={form.subject} onChange={e => setForm(f => ({ ...f, subject: e.target.value }))} placeholder="What is your enquiry about?" className="w-full px-4 py-3 rounded-xl border border-border bg-background focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all text-sm text-foreground" />
+                          <label className="block text-sm font-semibold text-foreground mb-2">{content?.contact_tab?.form?.labels?.subject || 'Subject *'}</label>
+                          <input name="subject" type="text" required value={form.subject} onChange={e => setForm(f => ({ ...f, subject: e.target.value }))} placeholder={content?.contact_tab?.form?.placeholders?.subject || "What is your enquiry about?"} className="w-full px-4 py-3 rounded-xl border border-border bg-background focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all text-sm text-foreground" />
                         </div>
                         <div>
-                          <label className="block text-sm font-semibold text-foreground mb-2">Message *</label>
-                          <textarea name="message" required value={form.message} onChange={e => setForm(f => ({ ...f, message: e.target.value }))} rows={5} placeholder="Please provide details..." className="w-full px-4 py-3 rounded-xl border border-border bg-background focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all resize-none text-sm text-foreground" />
+                          <label className="block text-sm font-semibold text-foreground mb-2">{content?.contact_tab?.form?.labels?.message || 'Message *'}</label>
+                          <textarea name="message" required value={form.message} onChange={e => setForm(f => ({ ...f, message: e.target.value }))} rows={5} placeholder={content?.contact_tab?.form?.placeholders?.message || "Please provide details..."} className="w-full px-4 py-3 rounded-xl border border-border bg-background focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all resize-none text-sm text-foreground" />
                         </div>
                         <button type="submit" disabled={state.submitting} className="w-full py-4 rounded-xl bg-primary text-primary-foreground hover:opacity-90 transition-opacity flex items-center justify-center gap-2 font-bold shadow-md">
-                          {state.submitting ? "Sending..." : "Send Message"} <ArrowRight className="w-5 h-5" />
+                          {state.submitting ? (content?.contact_tab?.form?.submitting_btn || "Sending...") : (content?.contact_tab?.form?.submit_btn || "Send Message")} <ArrowRight className="w-5 h-5" />
                         </button>
                       </form>
                     )}
                   </div>
 
-                  {/* DIRECTORY & HOURS */}
                   <div className="space-y-6">
                     <div>
-                      <h3 className="font-bold text-xl text-foreground mb-4">Department Directory</h3>
+                      <h3 className="font-bold text-xl text-foreground mb-4">{content?.contact_tab?.directory?.title || 'Department Directory'}</h3>
                       <div className="space-y-3">
                         {departments.map(dept => (
                           <div key={dept.id} className="bg-card rounded-2xl p-5 border border-border shadow-sm">
@@ -187,7 +183,7 @@ export default function SupportContactPage() {
                     <div className="bg-primary/5 rounded-2xl p-6 border border-primary/20">
                       <div className="flex items-center gap-2.5 mb-5">
                         <Clock className="w-5 h-5 text-primary" />
-                        <h4 className="font-bold text-foreground">Office Hours</h4>
+                        <h4 className="font-bold text-foreground">{content?.contact_tab?.office_hours?.title || 'Office Hours'}</h4>
                       </div>
                       <div className="space-y-3">
                         {[
@@ -209,18 +205,16 @@ export default function SupportContactPage() {
           </motion.div>
         )}
 
-        {/* ================= SUPPORT TAB (FAQs & Categories Only) ================= */}
         {activeTab === 'support' && (
           <motion.div key="support" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.3 }}>
-            
             <section className="py-16 bg-background">
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 
-                {/* CATEGORIES */}
                 <div className="text-center mb-12">
-                  <h2 className="text-3xl font-extrabold text-foreground mb-3">Support Categories</h2>
-                  <p className="text-muted-foreground">Explore our main help categories for quick answers.</p>
+                  <h2 className="text-3xl font-extrabold text-foreground mb-3">{content?.support_tab?.categories?.title || 'Support Categories'}</h2>
+                  <p className="text-muted-foreground">{content?.support_tab?.categories?.description || 'Explore our main help categories for quick answers.'}</p>
                 </div>
+                
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-20">
                   {supportCategories.map(({ icon: Icon, title, desc, theme, tickets }) => (
                     <div key={title} className="bg-card rounded-3xl p-6 border border-border hover:shadow-md transition-shadow cursor-pointer group">
@@ -228,7 +222,9 @@ export default function SupportContactPage() {
                         <div className={`w-12 h-12 rounded-2xl flex items-center justify-center ${theme.bg}`}>
                           <Icon className={`w-6 h-6 ${theme.text}`} />
                         </div>
-                        <span className={`text-xs font-bold px-3 py-1 rounded-full ${theme.bg} ${theme.text}`}>{tickets} topics</span>
+                        <span className={`text-xs font-bold px-3 py-1 rounded-full ${theme.bg} ${theme.text}`}>
+                          {tickets} {content?.support_tab?.categories?.topics_label || 'topics'}
+                        </span>
                       </div>
                       <h4 className="font-bold text-lg text-foreground mb-2">{title}</h4>
                       <p className="text-sm text-muted-foreground leading-relaxed">{desc}</p>
@@ -236,10 +232,9 @@ export default function SupportContactPage() {
                   ))}
                 </div>
 
-                {/* FAQ SECTION */}
                 <div className="max-w-3xl mx-auto">
                   <div className="text-center mb-10">
-                    <h3 className="font-extrabold text-2xl text-foreground">Frequently Asked Questions</h3>
+                    <h3 className="font-extrabold text-2xl text-foreground">{content?.support_tab?.faqs?.title || 'Frequently Asked Questions'}</h3>
                   </div>
                   <div className="space-y-8">
                     {faqs.map(group => (
@@ -276,7 +271,6 @@ export default function SupportContactPage() {
         )}
       </AnimatePresence>
 
-      {/* SHARED MAP SECTION */}
       <section id="map" className="py-0">
         <div className="w-full h-[400px] relative overflow-hidden bg-secondary/30 border-t border-border">
           <div className="absolute inset-0 bg-gradient-to-br from-secondary/40 to-transparent flex items-center justify-center">
@@ -284,15 +278,15 @@ export default function SupportContactPage() {
               <div className="w-16 h-16 rounded-full bg-primary flex items-center justify-center mx-auto mb-4 shadow-md">
                 <MapPin className="w-8 h-8 text-primary-foreground" />
               </div>
-              <p className="font-extrabold text-xl text-foreground mb-1">Madrasaty Academy</p>
-              <p className="text-sm text-muted-foreground mb-5">Academic City, Syria</p>
+              <p className="font-extrabold text-xl text-foreground mb-1">{content?.map_section?.title || 'Madrasaty Academy'}</p>
+              <p className="text-sm text-muted-foreground mb-5">{content?.map_section?.subtitle || 'Academic City, Syria'}</p>
               <a
                 href="https://maps.google.com/?q=Academic+City+Syria"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground hover:opacity-90 transition-opacity font-bold text-sm shadow-md"
               >
-                Open in Google Maps <ArrowRight className="w-4 h-4" />
+                {content?.map_section?.button || 'Open in Google Maps'} <ArrowRight className="w-4 h-4" />
               </a>
             </div>
           </div>
